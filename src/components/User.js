@@ -1,8 +1,7 @@
 import React from 'react'
 
-const user = ({user,selectid}) => {
+const user = ({user,selectid,checked}) => {
     const onChange =() => {
-        console.log( user.id)
         const A=user.id;
         selectid(A);
       }

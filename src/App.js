@@ -1,14 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Button from './components/Button.js'
 import Users from './components/Users.js'
 import './App.css';
 
-function App({user}) {
-  useEffect(()=>{
-    console.log("Test")
+function App() {
 
-},)
-const myID =useRef(null);
   const [users, setUsers] = useState(
     [
         {
@@ -45,7 +41,6 @@ const myID =useRef(null);
       },
     ]
 )
-
 const [pauses, setPauses] = useState(
   [
       {
@@ -74,34 +69,43 @@ const [pauses, setPauses] = useState(
         }
   ]
 )
-//onChange
 
-// Button onClic Depasser
-const Depasser = (user) => {
-  // setUsers(users.filter((user)=> user.id !==id))
-  
-  console.log(user.id+ " a depasser le temps")
+// Use effects
+useEffect(()=>{
+console.log("Test use effect number :"+d)
 
-}
+},d)
+// Variabe du user
 var u ;
 const selectID = (id)=>{
   u = id;
   console.log({"u": u});
 }
+
+// Button onClic Depasser
+var d= 1;
+const Depasser = (user) => {
+  const id = users[u].id = users.length +d
+  const newUser = {id,...user}
+  setUsers([newUser,...users])
+  d=d+1
+  
+}
 // Button onClic Annuler
 const Annuler =() => {
-  console.log("Annuler la pause le temps")
+  console.log(u+" a Annuler la pause le temps")
 }
 // Button onClic Depasser
 const Arrete =() => {
-  console.log(" est Arreter")
+  console.log(u+" est Arreter")
 }
+
   return (
     <div className="App">
-      <Button color='Green' text='Depasser' ref={myID} onClick={Depasser} />
+      <Button color='Green' text='Depasser' onClick={Depasser} />
       <Button color='Orange' text='Annuler' onClick={Annuler}/>
       <Button color='Red' text='Arrêter'  onClick={Arrete}/>
-      <Users users={users} selectid={selectID}/>
+      <Users users={users} selectid={selectID} />
     </div>
   );
 }
