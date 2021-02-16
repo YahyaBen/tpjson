@@ -1,23 +1,54 @@
-import logo from './logo.svg';
+import { useState } from 'react'
+import Button from './components/Button.js'
+import Users from './components/Users.js'
 import './App.css';
 
-function App() {
+function App({color,text}) {
+
+  const [users, setUsers] = useState(
+    [
+        {
+            id:1,
+            pseudo:'Imad',
+            password:'Feb',
+            team: [{
+
+            }]
+        },
+        {
+            id:2,
+            pseudo:'Yahya',
+            password:'Jan',
+            team: [{
+
+            }]
+        },
+        {
+            id:3,
+            pseudo:'RZK',
+            password:'mars',
+            team: [{
+
+            }]
+        },
+        {
+          id:3,
+          pseudo:'Saad',
+          password:'mars',
+          team: [{
+
+          }]
+      },
+    ]
+)
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button color='Green' text='Demarrer'/>
+      <Button color='Orange' text='Annuler'/>
+      <Button color='Red' text='Arrêter'/>
+      <Users users={users}/>
     </div>
   );
 }
