@@ -8,7 +8,7 @@ function App() {
   const [users, setUsers] = useState(
     [
         {
-            id:1,
+            id:0,
             pseudo:'Imad',
             password:'Feb',
             team: [{
@@ -16,7 +16,7 @@ function App() {
             }]
         },
         {
-            id:2,
+            id:1,
             pseudo:'Yahya',
             password:'Jan',
             team: [{
@@ -24,7 +24,7 @@ function App() {
             }]
         },
         {
-            id:3,
+            id:2,
             pseudo:'RZK',
             password:'mars',
             team: [{
@@ -32,7 +32,7 @@ function App() {
             }]
         },
         {
-          id:4,
+          id:3,
           pseudo:'Saad',
           password:'mars',
           team: [{
@@ -74,7 +74,7 @@ const [pauses, setPauses] = useState(
 useEffect(()=>{
 console.log("Test use effect number :"+d)
 
-},d)
+})
 // Variabe du user
 var u ;
 const selectID = (id)=>{
@@ -83,13 +83,27 @@ const selectID = (id)=>{
 }
 
 // Button onClic Depasser
-var d= 1;
-const Depasser = (user) => {
-  const id = users[u].id = users.length +d
-  const newUser = {id,...user}
-  setUsers([newUser,...users])
-  d=d+1
-  
+var d=1;
+const Demander = () => {
+  const id =users.length +d
+  const pseudo = "Mohammed"
+  const password ="BBB"
+  const team =[ ]
+  const newUser = {id,pseudo,password,team}
+  setUsers([...users,newUser])
+  console.log(d)
+}
+const Depanner = () => {
+  const id =users.length +1
+  const pseudo = users[u].pseudo
+  const password =users[u].password
+  const team =users[u].team
+  const key =users.length +1
+  const modifUser = {id,pseudo,password,team,key}
+  const newListe = users.filter((item) => item.id !== u);
+  setUsers([...newListe,modifUser])
+
+  console.log(d)
 }
 // Button onClic Annuler
 const Annuler =() => {
@@ -102,7 +116,8 @@ const Arrete =() => {
 
   return (
     <div className="App">
-      <Button color='Green' text='Depasser' onClick={Depasser} />
+      <Button color='Green' text='Demander' onClick={Demander} />
+      <Button color='Blue' text='Depanner' onClick={Depanner} />
       <Button color='Orange' text='Annuler' onClick={Annuler}/>
       <Button color='Red' text='Arrêter'  onClick={Arrete}/>
       <Users users={users} selectid={selectID} />

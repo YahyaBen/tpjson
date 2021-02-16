@@ -1,12 +1,12 @@
 import React from 'react'
 import User from './User.js'
 
-const Users = ({users ,selectid,checked}) => {
+const Users = ({users ,selectid}) => {
     return (
         <ol>
-            {users.map((user) => (
+            {users.map((user) => 
             <User user={user} key={user.id}  selectid={selectid} 
-            />))}
+            />)}
         </ol>
     )
 }
