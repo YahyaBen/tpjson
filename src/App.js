@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Button from './components/Button.js'
 import Users from './components/Users.js'
 import './App.css';
@@ -7,7 +7,8 @@ function App({user}) {
   useEffect(()=>{
     console.log("Test")
 
-  },)
+},)
+const myID =useRef(null);
   const [users, setUsers] = useState(
     [
         {
@@ -73,13 +74,19 @@ const [pauses, setPauses] = useState(
         }
   ]
 )
-
+//onChange
 
 // Button onClic Depasser
-const Depasser = (id) => {
-  setUsers(users.filter((user)=> user.id !==id))
-  console.log(user.id+"a depasser le temps")
+const Depasser = (user) => {
+  // setUsers(users.filter((user)=> user.id !==id))
+  
+  console.log(user.id+ " a depasser le temps")
 
+}
+var u ;
+const selectID = (id)=>{
+  u = id;
+  console.log({"u": u});
 }
 // Button onClic Annuler
 const Annuler =() => {
@@ -91,10 +98,10 @@ const Arrete =() => {
 }
   return (
     <div className="App">
-      <Button color='Green' text='Depasser' onClick={Depasser} />
+      <Button color='Green' text='Depasser' ref={myID} onClick={Depasser} />
       <Button color='Orange' text='Annuler' onClick={Annuler}/>
-      <Button color='Red' text='Arrêter' onClick={Arrete}/>
-      <Users users={users} onC/>
+      <Button color='Red' text='Arrêter'  onClick={Arrete}/>
+      <Users users={users} selectid={selectID}/>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import User from './User.js'
 
-const Users = ({users}) => {
+const Users = ({users ,selectid}) => {
     return (
         <ol>
             {users.map((user) => (
-            <User user={user} key={user.id} 
+            <User user={user} key={user.id}  selectid={selectid}
             />))}
         </ol>
     )
