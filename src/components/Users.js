@@ -5,7 +5,7 @@ const Users = ({users}) => {
     return (
         <ol>
             {users.map((user) => (
-            <User user={user}
+            <User user={user} key={user.id} 
             />))}
         </ol>
     )

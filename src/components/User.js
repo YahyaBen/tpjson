@@ -1,9 +1,14 @@
 import React from 'react'
 
-const user = ({user}) => {
+const user = ({user,onChange}) => {
     return (
         <>
-          <li> <input type="checkbox" />{user.pseudo}</li>
+          <li> <input 
+          type="checkbox" 
+          className="user" 
+          onChange={onChange}
+          
+          />{user.pseudo}</li>
         </>
     )
 }
