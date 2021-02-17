@@ -93,7 +93,7 @@ const Demander = () => {
   setUsers([...users,newUser])
   console.log(d)
 }
-const Depanner = () => {
+const Depanner = () => { //solution newUser
   const id =users.length +1
   const pseudo = users[u].pseudo
   const password =users[u].password
@@ -106,19 +106,19 @@ const Depanner = () => {
   console.log(d)
 }
 // Button onClic Annuler
-const Annuler =() => {
-  console.log(u+" a Annuler la pause le temps")
+const Arrete =() => {
+  const newListe = users.filter((item) => item.id !== u);
+  setUsers([...newListe])
 }
 // Button onClic Depasser
-const Arrete =() => {
-  console.log(u+" est Arreter")
-}
+// const Arrete =() => {
+//   console.log(u+" est Arreter")
+// }
 
   return (
     <div className="App">
       <Button color='Green' text='Demander' onClick={Demander} />
       <Button color='Blue' text='Depanner' onClick={Depanner} />
-      <Button color='Orange' text='Annuler' onClick={Annuler}/>
       <Button color='Red' text='Arrêter'  onClick={Arrete}/>
       <Users users={users} selectid={selectID} />
     </div>
