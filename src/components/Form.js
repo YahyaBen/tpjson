@@ -14,7 +14,6 @@ const Form = ({onAdd}) => {
         setPseudo('')
         setPassword('')
       }
-
         return (
             <form className='add-form' onSubmit={onSubmit}>
                 <div className='form-control'>
@@ -29,7 +28,7 @@ const Form = ({onAdd}) => {
                 <div className='form-control'>
                     <label> Password </label>
                     <input 
-                    type='text' 
+                    type='password' 
                     placeholder='Password' 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

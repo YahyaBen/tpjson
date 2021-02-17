@@ -59,7 +59,7 @@ const selectID = (id)=>{
 // Demander une pause
 var d=1;
 const Demander = () => {
-  const id =users.length +d
+  const id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
   const pseudo = "Mohammed"
   const password ="BBB"
   const team =[ ]
@@ -69,6 +69,11 @@ const Demander = () => {
 
  //Modifier Position / Prolanger une Pause
 const Prolonger = () => {
+  if(u==null){ alert("selectioner un utilisateur") }
+  else if(Math.max.apply(Math,users.map(function(A){return A.id})) == u){ 
+    alert("Il est deja en bas de la file d'attente") 
+  }
+  else {
   console.log(Math.max.apply(Math,users.map(function(A){return A.id}))+ " is Max") // Return max des utilisateurs
   console.log(users.find(g => u == g.id)) // voir l'objet filtrer 
   const Filter = users.find(g => u == g.id) // Objet filtrer
@@ -77,11 +82,14 @@ const Prolonger = () => {
   setUsers([...newListe,Filter]) // Nouvelle Liste
   setCount(count +1)
 }
+}
 
 // Supprimer de la liste d'attente
-const Supprimer =() => {
+const Supprimer =() => {if(u==null){ alert("selectioner un utilisateur") }
+else{
   const newListe = users.filter((item) => item.id !== u);
   setUsers([...newListe])
+}
 }
 const addUser = (user) => {
   const id = Math.max.apply(Math,users.map(function(A){return A.id}))+1
@@ -90,13 +98,16 @@ const addUser = (user) => {
 }
 
   return (
+    <div>
     <div className="App">
+            
+      <div><Form onAdd={addUser}/></div>
+
       <Button color='Green' text='Demander' onClick={Demander} />
       <Button color='Orange' text='Prolonger' onClick={Prolonger} />
       <Button color='Red' text='Supprimer'  onClick={Supprimer}/>
-      <Users users={users} selectid={selectID} />
-      <Form/>
-    </div>
+      <Users users={users} selectid={selectID} />     
+    </div></div>
   );
 }
 
