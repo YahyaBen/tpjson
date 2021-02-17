@@ -96,15 +96,14 @@ const Demander = () => {
 
 const Depanner = () => { //solution newUser
   console.log(Math.max.apply(Math,users.map(function(A){return A.id}))+ " is Max") // Return ma
-  console.log(users.filter(g => u == g.id)) // voir l'objet filtrer
+  console.log(users.find(g => u == g.id)) // voir l'objet filtrer
   const Filter = users.find(g => u == g.id) //
-  Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
-
   const newListe = users.filter((item) => item.id !== u);
+  Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
   setUsers([...newListe,Filter])
   setCount(count +1)
 }
-// Button onClic Annuler
+// Button onClic Arreter
 const Arrete =() => {
   const newListe = users.filter((item) => item.id !== u);
   setUsers([...newListe])
