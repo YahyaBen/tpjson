@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Button from './components/Button.js'
 import Users from './components/Users.js'
 import './App.css';
+import Form from './components/Form.js';
 
 function App() {
   const [count, setCount] = useState(1)
@@ -41,48 +42,21 @@ function App() {
       },
     ]
 )
-const [pauses, setPauses] = useState(
-  [
-      {
-          id:1,
-          dateDemande:'Imad',
-          dateDebut:'Feb',
-          IDUser: [3]
-      },
-      {
-        id:2,
-        dateDemande:'Imad',
-        dateDebut:'Feb',
-        IDUser: [1]
-      },
-      {
-        id:3,
-        dateDemande:'Imad',
-        dateDebut:'Feb',
-        IDUser: [4]
-      },
-      {
-        id:4,
-        dateDemande:'Imad',
-        dateDebut:'Feb',
-        IDUser: [2]
-        }
-  ]
-)
 
 // Use effects
 useEffect(()=>{
-console.log("Test use effect number :"+d)
+console.log("Test use effect number :"+count)
+setCount(count+1)
+},[users])
 
-})
-// Variabe du user
+// Recuperation de 'ID de l'utilisateur
 var u ;
 const selectID = (id)=>{
   u = id;
   console.log({"u": u});
 }
 
-// Button onClic add
+// Demander une pause
 var d=1;
 const Demander = () => {
   const id =users.length +d
@@ -91,34 +65,37 @@ const Demander = () => {
   const team =[ ]
   const newUser = {id,pseudo,password,team}
   setUsers([...users,newUser])
-
 }
 
-const Depanner = () => { //solution newUser
-  console.log(Math.max.apply(Math,users.map(function(A){return A.id}))+ " is Max") // Return ma
-  console.log(users.find(g => u == g.id)) // voir l'objet filtrer
-  const Filter = users.find(g => u == g.id) //
-  const newListe = users.filter((item) => item.id !== u);
-  Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
-  setUsers([...newListe,Filter])
+ //Modifier Position / Prolanger une Pause
+const Prolonger = () => {
+  console.log(Math.max.apply(Math,users.map(function(A){return A.id}))+ " is Max") // Return max des utilisateurs
+  console.log(users.find(g => u == g.id)) // voir l'objet filtrer 
+  const Filter = users.find(g => u == g.id) // Objet filtrer
+  const newListe = users.filter((item) => item.id !== u); // Extraction de la nouvelle liste avat modification
+  Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1 // modification de l'id
+  setUsers([...newListe,Filter]) // Nouvelle Liste
   setCount(count +1)
 }
-// Button onClic Arreter
-const Arrete =() => {
+
+// Supprimer de la liste d'attente
+const Supprimer =() => {
   const newListe = users.filter((item) => item.id !== u);
   setUsers([...newListe])
 }
-// Button onClic Depasser
-// const Arrete =() => {
-//   console.log(u+" est Arreter")
-// }
+const addUser = (user) => {
+  const id = Math.max.apply(Math,users.map(function(A){return A.id}))+1
+  const newUser={id,...user}
+  setUsers([...users, newUser])
+}
 
   return (
     <div className="App">
       <Button color='Green' text='Demander' onClick={Demander} />
-      <Button color='Blue' text='Depanner' onClick={Depanner} />
-      <Button color='Red' text='Arrêter'  onClick={Arrete}/>
+      <Button color='Orange' text='Prolonger' onClick={Prolonger} />
+      <Button color='Red' text='Supprimer'  onClick={Supprimer}/>
       <Users users={users} selectid={selectID} />
+      <Form/>
     </div>
   );
 }

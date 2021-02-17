@@ -4,8 +4,7 @@ const user = ({user,selectid}) => {
     const onChange =() => {
         const A=user.id;
         selectid(A);
-        console.log(A + " User ID Active")
-        
+        console.log(A + " User ID Active") // pour voir l'utilisateur active
       }
     return (
         <>
