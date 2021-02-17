@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Button from './components/Button.js'
 import Users from './components/Users.js'
-import './App.css';
 import Form from './components/Form.js';
 
 function App() {
@@ -91,23 +90,39 @@ else{
   setUsers([...newListe])
 }
 }
+// Ajouter un users
 const addUser = (user) => {
   const id = Math.max.apply(Math,users.map(function(A){return A.id}))+1
   const newUser={id,...user}
   setUsers([...users, newUser])
 }
 
-  return (
-    <div>
-    <div className="App">
-            
-      <div><Form onAdd={addUser}/></div>
+// Users Up
+const goUP = () => {
+  var A =users
+  A[u] = A.splice(1,1,A[u])[0]
+alert(A)
 
+}
+
+// Users down
+const goDown = (user) => {
+  const id = Math.max.apply(Math,users.map(function(A){return A.id}))+1
+  const newUser={id,...user}
+  setUsers([...users, newUser])
+}
+  return (
+    <div className="flex-container">
+    <div className="Form"><Form onAdd={addUser}/></div>
+    <div className="List"><Users users={users} selectid={selectID} /></div>
+    <div className="Button">
       <Button color='Green' text='Demander' onClick={Demander} />
       <Button color='Orange' text='Prolonger' onClick={Prolonger} />
       <Button color='Red' text='Supprimer'  onClick={Supprimer}/>
-      <Users users={users} selectid={selectID} />     
-    </div></div>
+      {/* <Button color='grey' text='Up'  onClick={goUP}/> // c'est fini */}
+      {/* <Button color='grey' text='SupprDownr'  onClick={goDown}/> */}
+    </div>
+    </div>
   );
 }
 

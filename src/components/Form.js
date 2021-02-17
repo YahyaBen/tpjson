@@ -6,7 +6,7 @@ const Form = ({onAdd}) => {
     const[password,setPassword]= useState('')
     const onSubmit = (e) => {
         e.preventDefault()
-        if(!pseudo && !password){
+        if(!pseudo || !password){
             alert('Rempliser les champs SVP ! ')
             return
         }
@@ -17,7 +17,7 @@ const Form = ({onAdd}) => {
         return (
             <form className='add-form' onSubmit={onSubmit}>
                 <div className='form-control'>
-                    <label> Pseudo </label>
+                    <label> Entrer Voutre Pseudo : </label>
                     <input 
                     type='text' 
                     placeholder='Pseudo' 
@@ -26,7 +26,7 @@ const Form = ({onAdd}) => {
                     />
                 </div>
                 <div className='form-control'>
-                    <label> Password </label>
+                    <label> Entrer Voutre Password : </label>
                     <input 
                     type='password' 
                     placeholder='Password' 
