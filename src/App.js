@@ -4,7 +4,7 @@ import Users from './components/Users.js'
 import './App.css';
 
 function App() {
-
+  const [count, setCount] = useState(1)
   const [users, setUsers] = useState(
     [
         {
@@ -82,7 +82,7 @@ const selectID = (id)=>{
   console.log({"u": u});
 }
 
-// Button onClic Depasser
+// Button onClic add
 var d=1;
 const Demander = () => {
   const id =users.length +d
@@ -91,19 +91,18 @@ const Demander = () => {
   const team =[ ]
   const newUser = {id,pseudo,password,team}
   setUsers([...users,newUser])
-  console.log(d)
-}
-const Depanner = () => { //solution newUser
-  const id =users.length +1
-  const pseudo = users[u].pseudo
-  const password =users[u].password
-  const team =users[u].team
-  const key =users.length +1
-  const modifUser = {id,pseudo,password,team,key}
-  const newListe = users.filter((item) => item.id !== u);
-  setUsers([...newListe,modifUser])
 
-  console.log(d)
+}
+
+const Depanner = () => { //solution newUser
+  console.log(Math.max.apply(Math,users.map(function(A){return A.id}))+ " is Max") // Return ma
+  console.log(users.filter(g => u == g.id)) // voir l'objet filtrer
+  const Filter = users.find(g => u == g.id) //
+  Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
+
+  const newListe = users.filter((item) => item.id !== u);
+  setUsers([...newListe,Filter])
+  setCount(count +1)
 }
 // Button onClic Annuler
 const Arrete =() => {
