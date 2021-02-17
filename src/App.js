@@ -44,7 +44,8 @@ function App() {
 
 // Use effects
 useEffect(()=>{
-console.log("Test use effect number :"+count)
+
+alert("Test use effect number :"+count)
 setCount(count+1)
 },[users])
 
@@ -79,7 +80,6 @@ const Prolonger = () => {
   const newListe = users.filter((item) => item.id !== u); // Extraction de la nouvelle liste avat modification
   Filter.id =Math.max.apply(Math,users.map(function(A){return A.id}))+1 // modification de l'id
   setUsers([...newListe,Filter]) // Nouvelle Liste
-  setCount(count +1)
 }
 }
 
