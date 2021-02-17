@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Button from './components/Button.js'
 import Users from './components/Users.js'
 import Form from './components/Form.js';
+import Parent from './components/Parent.js';
 
 function App() {
-  const [count, setCount] = useState(1)
+  const count = useRef (2)
   const [users, setUsers] = useState(
     [
         {
@@ -44,9 +45,8 @@ function App() {
 
 // Use effects
 useEffect(()=>{
-
-alert("Test use effect number :"+count)
-setCount(count+1)
+alert("Test use effect number :")
+count.current = count.current +1
 },[users])
 
 // Recuperation de 'ID de l'utilisateur
@@ -113,6 +113,9 @@ const goDown = (user) => {
 }
   return (
     <div className="flex-container">
+      <p>
+        {count.current}
+      </p>
     <div className="Form"><Form onAdd={addUser}/></div>
     <div className="List"><Users users={users} selectid={selectID} /></div>
     <div className="Button">
@@ -121,6 +124,7 @@ const goDown = (user) => {
       <Button color='Red' text='Supprimer'  onClick={Supprimer}/>
       {/* <Button color='grey' text='Up'  onClick={goUP}/> // c'est fini */}
       {/* <Button color='grey' text='SupprDownr'  onClick={goDown}/> */}
+      <Parent />
     </div>
     </div>
   );
