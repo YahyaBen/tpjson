@@ -3,7 +3,7 @@ import React from 'react'
 const Timers = ({time}) => {
     return (
         <div>
-            <p> {time}</p>
+            <p> {time} +</p>
         </div>
     )
 }

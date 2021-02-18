@@ -6,7 +6,6 @@ import Timers from './components/Timers.js';
 
 
 function App() {
-  const count = useRef (1)
   const [users, setUsers] = useState(
     [
         {
@@ -40,14 +39,30 @@ function App() {
           team: [{
 
           }]
+          
       },
+      {
+        id:4,
+        pseudo:'Mohammed',
+        password:'Juin',
+        team: [{
+
+        }]
+    }
     ]
 )
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
 // Recuperation de 'ID de l'utilisateur
-var u ;
+var u,x ;
 const selectID = (id)=>{
   u = id;
-  console.log({"u": u});
+  return u
+
 }
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
@@ -55,10 +70,13 @@ const selectID = (id)=>{
 ///////////////////////////////////////////////////////////////
 //////////////////////////Stop Watch //////////////////////////
 ///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
 const [timer, setTimer] = useState(0)
 const [isActive, setIsActive] = useState(false)
 const [isPaused, setIsPaused] = useState(false)
-const [isSelected,SetIsSelected] = useState(false)
+const [personne,setPersonne] =useState("No One is Selected")
+const [Comps,setComps] =useState([])
 const countRef = useRef(0)
 
 const Start = () => {
@@ -67,7 +85,8 @@ const Start = () => {
   setIsPaused(true)
   countRef.current = setInterval(() => {
     setTimer((timer) => timer + 1)
-  }, 10)
+  }, 1000)
+
 }
 
 const Pause = () => {
@@ -81,7 +100,7 @@ const Resume = () => {
   setIsPaused(true)
   countRef.current = setInterval(() => {
     setTimer((timer) => timer + 1)
-  }, 10)
+  }, 1000)
 }
 
 const Reset = () => {
@@ -95,12 +114,12 @@ const Reset = () => {
 ///////////////////////// Formatting Time ////////////////////
 //////////////////////////////////////////////////////////////
 const formatTime = () => {
+
   const getSeconds = `0${(timer % 60)}`.slice(-2)
   const minutes = `${Math.floor(timer / 60)}`
   const getMinutes = `0${minutes % 60}`.slice(-2)
   const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
   return getHours+ `:` +getMinutes+ `:`+getSeconds 
-
 }
 
 
@@ -119,11 +138,16 @@ useEffect(()=>{
 // Demander une pause
 var d=1;
 const Demander = () => {
-
+///////////////////////////////////////
   var x = users.find(e=> e.id == u);
   var index = users.indexOf(x);
   alert(users[index].pseudo+" Veux une pause")
   console.log(users[u])
+
+  setComps([...Comps,<Button color='Green' text='Demander'/>])// a la place des deux button rajouter de parametre
+
+///////////////////////////////////////
+
   // const id =Math.max.apply(Math,users.map(function(A){return A.id}))+1
   // const pseudo = "Mohammed"
   // const password ="BBB"
@@ -176,6 +200,7 @@ const goDown = (user) => {
   const newUser={id,...user}
   setUsers([...users, newUser])
 }
+
   return (
     <div className="flex-container">
     <div className="Form"><Form onAdd={addUser}/></div>
@@ -185,10 +210,12 @@ const goDown = (user) => {
       <Button color='Orange' text='Prolonger' onClick={Prolonger} />
       <Button color='Red' text='Supprimer'  onClick={Supprimer}/>
     </div>
-    
-    <div>
-        <Timers time={formatTime()}/>
-    </div>
+
+    {
+            !isActive && !isPaused  ? 
+            <div> hiiii {personne} </div>
+    : <Timers time={formatTime()}/>
+}
 
     <div className="Button">
     {
@@ -201,7 +228,14 @@ const goDown = (user) => {
           }
           <Button color='Blue' text='Reset'  onClick={Reset}/>  
     </div>
+
+    
+    {Comps!=null ? Comps.map(item => (
+   
+            <li key={item}>{item}</li>)) : <div><p>ahhahahahahahaha</p></div>
+          }
     </div>
+
   );
 }
 
