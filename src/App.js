@@ -144,7 +144,7 @@ const Demander = () => {
   alert(users[index].pseudo+" Veux une pause")
   console.log(users[u])
 
-  setComps([...Comps,<Button color='Green' text='Demander'/>])// a la place des deux button rajouter de parametre
+  setComps([...Comps,<Button color='Grey' text='New Component !'/>])// a la place des deux button rajouter de parametre
 
 ///////////////////////////////////////
 
@@ -216,7 +216,6 @@ const goDown = (user) => {
             <div> hiiii {personne} </div>
     : <Timers time={formatTime()}/>
 }
-
     <div className="Button">
     {
             !isActive && !isPaused ?
@@ -229,11 +228,13 @@ const goDown = (user) => {
           <Button color='Blue' text='Reset'  onClick={Reset}/>  
     </div>
 
-    
+    <div className="Button">
     {Comps!=null ? Comps.map(item => (
-   
-            <li key={item}>{item}</li>)) : <div><p>ahhahahahahahaha</p></div>
+            <li key={item}>{item}</li>)
+
+              )            : <p>ahhahahahahahaha</p>
           }
+          </div> 
     </div>
 
   );
